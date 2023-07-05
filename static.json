@@ -1,3 +1,4 @@
 {
-  "routes": [{"src": "/(.*)", "dest": "/index.html"}]
+  "clean_urls": false,
+  "redirects": [{"source": "/<*>", "destination": "/index.html", "type": 200}]
 }
