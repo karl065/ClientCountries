@@ -66,34 +66,34 @@ const CreateActivity = (props) => {
     }));
   };
 
-  const handlerDurationH = (e) => {
+  const handleDurationChange = (e) => {
     let time = e.target.value;
     if (time < 10) time = '0' + time;
-    console.log(time);
-    if (duracion.length === 0 || duracion.length < 3) {
-      setDuracion(time + ':00');
-    } else {
-      const partDuration = duracion.split(':');
-      partDuration[0] = time;
-      setDuracion(partDuration.join(':'));
+
+    if (e.target.name === 'horas') {
+      if (duracion.length === 0 || duracion.length < 3) {
+        setDuracion(time + ':00');
+      } else {
+        const partDuration = duracion.split(':');
+        partDuration[0] = time;
+        setDuracion(partDuration.join(':'));
+      }
+    } else if (e.target.name === 'minutos') {
+      if (duracion.length < 3) {
+        setDuracion(duracion + ':' + time);
+      } else {
+        const partDuration = duracion.split(':');
+        partDuration[1] = time;
+        setDuracion(partDuration.join(':'));
+      }
     }
-  };
-  const handlerDurationM = (e) => {
-    let time = e.target.value;
-    if (time < 10) time = '0' + time;
-    if (duracion.length < 3) {
-      setDuracion(duracion + ':' + time);
-    } else {
-      const partDuration = duracion.split(':');
-      partDuration[1] = time;
-      setDuracion(partDuration.join(':'));
-    }
+
     setActivityData({
       ...activityData,
       duracion: duracion,
     });
   };
-  console.log(duracion);
+
   const handleChange = (e) => {
     e.preventDefault();
     setActivityData({
@@ -161,14 +161,14 @@ const CreateActivity = (props) => {
             <label>Duracion</label>
             <div>
               <input
-                onChange={handlerDurationH}
+                onChange={handleDurationChange}
                 type="number"
                 min="00"
                 max="36"
                 placeholder="Horas"
               />
               <input
-                onChange={handlerDurationM}
+                onChange={handleDurationChange}
                 type="number"
                 min="00"
                 max="59"
